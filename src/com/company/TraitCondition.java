@@ -8,7 +8,7 @@ import java.util.function.BiFunction;
 import static com.company.TraitCondition.ConditionType.*;
 
 public class TraitCondition {
-    public enum ConditionType {TRUE, FALSE, EQUAL, GT, AND, OR, NOT}
+    public enum ConditionType {TRUE, FALSE, EQUAL, NOT_EQUAL, GT, LT, GE, LE, AND, OR, NOT}
 
     private Trait trait;
     private ConditionType type = TRUE;
@@ -21,7 +21,11 @@ public class TraitCondition {
     public static TraitCondition orCreate(TraitCondition... conditions){
         return new TraitCondition(OR, conditions);
     }
-     
+
+    public TraitCondition(ConditionType type, Trait trait){
+        this.type = type; //TODO make type checking
+        this.trait = trait;
+    }
 
     public TraitCondition(ConditionType type, TraitCondition ... conditions){
         this.type = type;
@@ -47,11 +51,21 @@ public class TraitCondition {
     }
 
     public boolean isSatisfiedBy(Creature creature){
+        return isSatisfiedBy(creature, type);
+    }
+
+    private boolean isSatisfiedBy(Creature creature, ConditionType type){
         boolean isSatisfied;
         switch (type){
             case TRUE -> isSatisfied = true;
             case EQUAL -> isSatisfied = creature.getTraits().getTrait(trait.getName()).getValue() == trait.getValue();
+            case NOT_EQUAL -> isSatisfied = !isSatisfiedBy(creature, EQUAL);
+
             case GT -> isSatisfied = creature.getTraits().getTrait(trait.getName()).getValue() > trait.getValue();
+            case GE -> isSatisfied = isSatisfiedBy(creature, EQUAL) || isSatisfiedBy(creature, GT);
+            case LT -> isSatisfied = !isSatisfiedBy(creature, GE);
+            case LE -> isSatisfied = !isSatisfiedBy(creature, GT);
+
             case AND -> isSatisfied = areSatisfiedBy(creature, true, (acc, x) -> acc && x);
             case OR -> isSatisfied = areSatisfiedBy(creature, false, (acc, x) -> acc || x);
             case FALSE -> isSatisfied = false;
