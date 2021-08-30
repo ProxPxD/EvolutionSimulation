@@ -4,6 +4,7 @@ import java.util.function.Function;
 
 public class Effect {
 
-    private Feature feature;
-
+    private Trait trait;
+    private TraitCondition traitConditions;
+    private Function<Trait, Trait> effect;
 }
