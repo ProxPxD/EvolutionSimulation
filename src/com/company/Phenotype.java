@@ -10,7 +10,6 @@ public class Phenotype {
     }
 
     public Trait getTrait(String traitName) {
-        traits.putIfAbsent(traitName, new Trait(traitName));
         return traits.get(traitName);
     }
 

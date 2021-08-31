@@ -2,9 +2,15 @@ package com.company;
 
 import lombok.Getter;
 
+import java.net.PortUnreachableException;
+import java.security.PublicKey;
 import java.util.function.Function;
 
 public class Effect {
+
+    public static Effect makeCreationalEffect(Trait toCreate){
+        return new Effect(toCreate.getName(), TraitCondition.makeNotExist(toCreate), t -> toCreate);
+    }
 
     @Getter
     private String name;
@@ -13,8 +19,8 @@ public class Effect {
     private TraitCondition traitCondition;
     private Function<Trait, Trait> effect;
 
-    Effect(String target, TraitCondition traitCondition, Function<Trait, Trait> effect){
-        this.target = target;
+    Effect(String targetTraitName, TraitCondition traitCondition, Function<Trait, Trait> effect){
+        this.target = targetTraitName;
         this.traitCondition = traitCondition;
         this.effect = effect;
     }

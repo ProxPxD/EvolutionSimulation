@@ -8,11 +8,7 @@ import java.util.function.BiFunction;
 import static com.company.TraitCondition.ConditionType.*;
 
 public class TraitCondition {
-    public enum ConditionType {TRUE, FALSE, EQUAL, NOT_EQUAL, GT, LT, GE, LE, AND, OR, NOT}
-
-    private Trait trait;
-    private ConditionType type = TRUE;
-    private List<TraitCondition> subConditions = new ArrayList<>();
+    public enum ConditionType {TRUE, FALSE, EQUAL, NOT_EQUAL, EXIST, NOT_EXIST, GT, LT, GE, LE, AND, OR, NOT}
 
     public static TraitCondition andCreate(TraitCondition... conditions){
         return new TraitCondition(AND, conditions);
@@ -53,6 +49,19 @@ public class TraitCondition {
     public static TraitCondition makeLessOrEqual(Trait trait){
         return new TraitCondition(LE, trait);
     }
+
+    public static TraitCondition makeExist(Trait trait){
+        return new TraitCondition(EXIST, trait);
+    }
+
+    public static TraitCondition makeNotExist(Trait trait){
+        return new TraitCondition(NOT_EXIST, trait);
+    }
+
+
+    private Trait trait;
+    private ConditionType type = TRUE;
+    private List<TraitCondition> subConditions = new ArrayList<>();
 
     private TraitCondition(ConditionType type, Trait trait){
         this.type = type;
@@ -97,6 +106,9 @@ public class TraitCondition {
             case GE -> isSatisfied = creature.getTrait(trait).getValue() >= trait.getValue();
             case LT -> isSatisfied = creature.getTrait(trait).getValue() < trait.getValue();
             case LE -> isSatisfied = creature.getTrait(trait).getValue() <= trait.getValue();
+
+            case EXIST -> isSatisfied = creature.getTraits().exist(trait.getName());
+            case NOT_EXIST -> isSatisfied = !creature.getTraits().exist(trait.getName());
 
             case AND -> isSatisfied = areSatisfiedBy(creature, true, (acc, x) -> acc && x);
             case OR -> isSatisfied = areSatisfiedBy(creature, false, (acc, x) -> acc || x);

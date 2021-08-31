@@ -2,18 +2,20 @@ package com.company;
 
 import lombok.Getter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Genotype {
     @Getter
-    private List<Gene> genes = new ArrayList<>();
+    private List<Gene> genes;
     private Creature owner;
 
-    public Genotype(Creature owner){
-        this.owner = owner;
+    public Genotype(List<Gene> genes){
+        this.genes = genes;
     }
 
+    public void setOwner(Creature owner){
+        this.owner = owner;
+    }
 
     public boolean shouldInfluence(){
         return genes.stream().anyMatch(g -> g.shouldInfluence(owner));

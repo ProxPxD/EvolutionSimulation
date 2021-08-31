@@ -13,6 +13,10 @@ public class Creature {
         return phenotype;
     }
 
+    public Genotype getGenome(){
+        return genome;
+    }
+
     public Trait getTrait(Trait trait){
         return getTrait(trait.getName());
     }
