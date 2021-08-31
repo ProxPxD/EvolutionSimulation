@@ -1,17 +1,11 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class Creature {
 
-    private List<Gene> genome;
+    private Genotype genome;
     private Phenotype phenotype;
 
-
-    public Creature(){
+    public Creature(Genotype genotype){
 
     }
 
@@ -27,4 +21,7 @@ public class Creature {
         return phenotype.getTrait(name);
     }
 
+    public void applyEffect(Effect effect){
+        phenotype.applyEffect(effect);
+    }
 }

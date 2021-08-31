@@ -1,5 +1,7 @@
 package com.company;
 
+import jdk.jshell.spi.ExecutionControl;
+
 import java.util.List;
 
 public class World {
@@ -18,7 +20,7 @@ public class World {
     }
 
     private Creature createCreature(){
-        Creature creature = new Creature();
+        Creature creature = null;
         return creature;
     }
 
