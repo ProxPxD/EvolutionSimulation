@@ -22,12 +22,32 @@ public class TraitCondition {
         return new TraitCondition(OR, conditions);
     }
 
-    public TraitCondition(ConditionType type, Trait trait){
-        this.type = type; //TODO make type checking
+    public static TraitCondition makeEqual(Trait trait){
+        return new TraitCondition(EQUAL, trait);
+    }
+
+    public static TraitCondition makeGreaterThan(Trait trait){
+        return new TraitCondition(GT, trait);
+    }
+
+    public static TraitCondition makeLessThan(Trait trait){
+        return new TraitCondition(LT, trait);
+    }
+
+    public static TraitCondition makeGreaterOrEqual(Trait trait){
+        return new TraitCondition(GE, trait);
+    }
+
+    public static TraitCondition makeLessOrEqual(Trait trait){
+        return new TraitCondition(LE, trait);
+    }
+
+    private TraitCondition(ConditionType type, Trait trait){
+        this.type = type;
         this.trait = trait;
     }
 
-    public TraitCondition(ConditionType type, TraitCondition ... conditions){
+    private TraitCondition(ConditionType type, TraitCondition ... conditions){
         this.type = type;
         subConditions.addAll(Arrays.asList(conditions));
     }
@@ -58,13 +78,13 @@ public class TraitCondition {
         boolean isSatisfied;
         switch (type){
             case TRUE -> isSatisfied = true;
-            case EQUAL -> isSatisfied = creature.getTraits().getTrait(trait.getName()).getValue() == trait.getValue();
-            case NOT_EQUAL -> isSatisfied = !isSatisfiedBy(creature, EQUAL);
+            case EQUAL -> isSatisfied = creature.getTrait(trait).equals(trait);
+            case NOT_EQUAL -> isSatisfied = !creature.getTrait(trait).equals(trait);
 
-            case GT -> isSatisfied = creature.getTraits().getTrait(trait.getName()).getValue() > trait.getValue();
-            case GE -> isSatisfied = isSatisfiedBy(creature, EQUAL) || isSatisfiedBy(creature, GT);
-            case LT -> isSatisfied = !isSatisfiedBy(creature, GE);
-            case LE -> isSatisfied = !isSatisfiedBy(creature, GT);
+            case GT -> isSatisfied = creature.getTrait(trait).getValue() > trait.getValue();
+            case GE -> isSatisfied = creature.getTrait(trait).getValue() >= trait.getValue();
+            case LT -> isSatisfied = creature.getTrait(trait).getValue() < trait.getValue();
+            case LE -> isSatisfied = creature.getTrait(trait).getValue() <= trait.getValue();
 
             case AND -> isSatisfied = areSatisfiedBy(creature, true, (acc, x) -> acc && x);
             case OR -> isSatisfied = areSatisfiedBy(creature, false, (acc, x) -> acc || x);
@@ -77,5 +97,4 @@ public class TraitCondition {
     private boolean areSatisfiedBy(Creature creature, Boolean initial, BiFunction<Boolean, Boolean, Boolean> condition){
         return subConditions.stream().map(c -> c.isSatisfiedBy(creature)).reduce(initial, condition::apply);
     }
-
 }
