@@ -22,8 +22,20 @@ public class TraitCondition {
         return new TraitCondition(OR, conditions);
     }
 
+    public static TraitCondition makeTrue(Trait trait){
+        return new TraitCondition(TRUE, trait);
+    }
+
+    public static TraitCondition makeFalse(Trait trait){
+        return new TraitCondition(FALSE, trait);
+    }
+
     public static TraitCondition makeEqual(Trait trait){
         return new TraitCondition(EQUAL, trait);
+    }
+
+    public static TraitCondition makeNotEqual(Trait trait){
+        return new TraitCondition(NOT_EQUAL, trait);
     }
 
     public static TraitCondition makeGreaterThan(Trait trait){
