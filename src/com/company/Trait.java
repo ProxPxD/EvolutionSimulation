@@ -16,6 +16,11 @@ public class Trait {
         this.name = name;
     }
 
+    public Trait(String name, double value){
+        this(name);
+        this.value = value;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

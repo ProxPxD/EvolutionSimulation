@@ -19,8 +19,9 @@ public class Allele {
         this.alleleName = alleleName;
     }
 
-    public void addEffect(Effect effect){
+    public Allele addEffect(Effect effect){
         effects.add(effect);
+        return this;
     }
 
     public void removeEffect(Effect effect){

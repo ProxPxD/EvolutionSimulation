@@ -1,7 +1,6 @@
 package com.company;
 
-import jdk.jshell.spi.ExecutionControl;
-
+import java.util.ArrayList;
 import java.util.List;
 
 public class World {
@@ -12,6 +11,7 @@ public class World {
     }
 
     private void initPopulation(int startingPopulation) throws NotPositiveException {
+        population = new ArrayList<>();
         if (startingPopulation <= 0)
             throw new NotPositiveException("Population");
         for(int i = 0; i < startingPopulation; i++){
@@ -25,6 +25,6 @@ public class World {
     }
 
     public void performDay(){
-
+        System.out.println(population.size());
     }
 }

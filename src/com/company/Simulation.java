@@ -37,6 +37,8 @@ public class Simulation {
 
     public void simulate(){
         while (day < dayLimit){
+            System.out.print(day);
+            System.out.print(": ");
             world.performDay();
             day++;
         }

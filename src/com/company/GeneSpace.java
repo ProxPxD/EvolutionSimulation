@@ -4,13 +4,13 @@ import lombok.Getter;
 
 import java.util.List;
 
-public class GeneAllelesSpace {
+public class GeneSpace {
 
     @Getter
     String geneName;
     private AllelePrevalence alleles = new AllelePrevalence();
 
-    public GeneAllelesSpace(String name){
+    public GeneSpace(String name){
         this.geneName = name;
     }
 
