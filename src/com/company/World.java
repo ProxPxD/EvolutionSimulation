@@ -9,6 +9,10 @@ public class World {
 
     public World(Scenario scenario){
         this.scenario = scenario;
+    }
+
+    public void init(){
+        scenario.init();
         initPopulation();
     }
 
@@ -27,6 +31,6 @@ public class World {
     }
 
     public void performDay(){
-        System.out.println(population.size());
+        
     }
 }

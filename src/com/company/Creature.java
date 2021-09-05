@@ -2,19 +2,19 @@ package com.company;
 
 public class Creature {
 
-    private Genotype genome;
+    private Genotype genotype;
     private Phenotype phenotype;
 
     public Creature(Genotype genotype){
-
+        this.genotype = genotype;
     }
 
     public Phenotype getTraits(){
         return phenotype;
     }
 
-    public Genotype getGenome(){
-        return genome;
+    public Genotype getGenotype(){
+        return genotype;
     }
 
     public Trait getTrait(Trait trait){

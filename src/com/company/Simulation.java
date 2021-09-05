@@ -26,7 +26,7 @@ public class Simulation {
     }
 
     public void init(){
-        initStartingValues();
+        world.init();
     }
 
     private void initStartingValues() throws NotPositiveException {

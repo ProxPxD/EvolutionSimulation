@@ -23,7 +23,7 @@ public class AllelePrevalence {
     }
 
     public void setEquinumerousRatio(){
-        setRatio();
+        setRatio(1.0);
     }
 
     public void setRatio(Double... ratio){
@@ -40,7 +40,7 @@ public class AllelePrevalence {
     }
 
     private void adjustRatio(List<Double> ratio, double sum){
-        double mean = sum / ratio.size();
+        Double mean = ratio.size() == 0 ? 0.0 : sum / ratio.size();
         while (ratio.size() < alleles.size())
             ratio.add(mean);
     }
@@ -58,6 +58,9 @@ public class AllelePrevalence {
     }
 
     public void computeNumberOfIndividualsPerAllele(int population){
+        if (percentage.isEmpty())
+            setEquinumerousRatio();
+
         numberOfIndividuals = percentage.stream().map(p -> (int) (population * p)).collect(Collectors.toList());
         while (numberOfIndividuals.stream().anyMatch(a -> a == 0)){
            adjustForZeroes();

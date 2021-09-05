@@ -2,7 +2,9 @@ package com.company;
 
 import lombok.Getter;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GeneSpace {
 
@@ -24,11 +26,10 @@ public class GeneSpace {
         alleles.setEquinumerousRatio();
     }
 
-    public void setRatio(Double... ratio){
-        alleles.setRatio(ratio);
+    public void setRatio(Integer... ratio){
+        alleles.setRatio(Arrays.stream(ratio).map(Integer::doubleValue).collect(Collectors.toList()));
     }
-
-    public void setRatio(List<Double> ratio){
+    public void setRatio(Double... ratio){
         alleles.setRatio(ratio);
     }
 

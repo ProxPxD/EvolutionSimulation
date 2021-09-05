@@ -8,9 +8,10 @@ public class Main {
         GeneSpace deathRate = new GeneSpace("deathRate");
         deathRate.createAllele("A").addEffect(Effect.makeCreationalEffect(new Trait("deathRate", 0.02)));
         GeneSpace reproductionRate = new GeneSpace("reproductionRate");
-        deathRate.createAllele("A").addEffect(Effect.makeCreationalEffect(new Trait("reproductionRate", 0.05)));
+        reproductionRate.createAllele("A").addEffect(Effect.makeCreationalEffect(new Trait("reproductionRate", 0.05)));
 
         scenario.addGeneSpaces(deathRate, reproductionRate);
+        scenario.setStartingPopulation(10);
 
         Simulation simulation = new Simulation(scenario);
         simulation.setDayLimit(200);

@@ -19,6 +19,10 @@ public class Allele {
         this.alleleName = alleleName;
     }
 
+    public String getFullName(){
+        return geneName + "." + alleleName;
+    }
+
     public Allele addEffect(Effect effect){
         effects.add(effect);
         return this;
