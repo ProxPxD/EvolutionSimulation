@@ -7,10 +7,10 @@ import static com.company.SimulationConstants.POPULATION_LIMIT;
 
 public class Simulation {
 
-    @Setter private int startingPopulation;
     @Setter private int dayLimit;
     private int day;
     @Setter int populationLimit;
+    Scenario scenario;
 
     private World world;
 
@@ -20,14 +20,14 @@ public class Simulation {
         populationLimit = POPULATION_LIMIT;
     }
 
-    public Simulation(int startingPopulation){
+    public Simulation(Scenario scenario){
         this();
-        this.startingPopulation = startingPopulation;
+        this.scenario = scenario;
     }
 
     public void init(){
         initStartingValues();
-        world = new World(startingPopulation);
+        world = new World(scenario.getStartingPopulation());
     }
 
     private void initStartingValues() throws NotPositiveException {

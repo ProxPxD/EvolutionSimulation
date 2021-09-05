@@ -1,12 +1,23 @@
 package com.company;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class Gene {
+public abstract class Gene {
 
     private List<Effect> effects = new ArrayList<>();
+    @Getter @Setter
+    private String geneName;
+    @Getter
+    private String alleleName;
+
+    public Gene(String alleleName){
+        this.alleleName = alleleName;
+    }
 
     public void addEffect(Effect effect){
         effects.add(effect);
