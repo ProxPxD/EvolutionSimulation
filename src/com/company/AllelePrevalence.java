@@ -6,23 +6,20 @@ import java.util.List;
 
 public class AllelePrevalence {
 
-    private String geneName;
-    private List<Gene> alleles;
+    private List<Allele> alleles;
     private List<Double> prevalence;
 
-    public AllelePrevalence(String geneName){
-        this.geneName = geneName;
+    public AllelePrevalence(){
         alleles = new ArrayList<>();
         prevalence = new ArrayList<>();
     }
 
-    public void addAlleles(Gene... genes){
-        Arrays.stream(genes).forEach(this::addAllele);
+    public void addAllele(Allele allele){
+        alleles.add(allele);
     }
 
-    public void addAllele(Gene gene){
-        gene.setGeneName(geneName);
-        alleles.add(gene);
+    public void setEquinumerousRatio(){
+        setRatio();
     }
 
     public void setRatio(Double... ratio){

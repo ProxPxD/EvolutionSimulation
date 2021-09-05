@@ -1,21 +1,21 @@
 package com.company;
 
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class Gene {
+public class Allele {
 
     private List<Effect> effects = new ArrayList<>();
-    @Getter @Setter
+    @Getter
     private String geneName;
     @Getter
     private String alleleName;
 
-    public Gene(String alleleName){
+    public Allele(String geneName, String alleleName){
+        this.geneName = geneName;
         this.alleleName = alleleName;
     }
 

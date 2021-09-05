@@ -2,8 +2,6 @@ package com.company;
 
 import lombok.Getter;
 
-import java.net.PortUnreachableException;
-import java.security.PublicKey;
 import java.util.function.Function;
 
 public class Effect {

@@ -6,10 +6,10 @@ import java.util.List;
 
 public class Genotype {
     @Getter
-    private List<Gene> genes;
+    private List<Allele> genes;
     private Creature owner;
 
-    public Genotype(List<Gene> genes){
+    public Genotype(List<Allele> genes){
         this.genes = genes;
     }
 
