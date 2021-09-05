@@ -1,10 +1,7 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class World {
-    private List<Creature> population;
+    private Population population;
     private Scenario scenario;
 
     public World(Scenario scenario){
@@ -13,24 +10,15 @@ public class World {
 
     public void init(){
         scenario.init();
-        initPopulation();
-    }
-
-    private void initPopulation() throws NotPositiveException {
-        population = new ArrayList<>();
-        if (scenario.getStartingPopulation() <= 0)
-            throw new NotPositiveException("Population");
-        for(int i = 0; i < scenario.getStartingPopulation(); i++){
-            population.add(createCreature());
-        }
-    }
-
-    private Creature createCreature(){
-        Creature creature = new Creature(scenario.getNextGenotype());
-        return creature;
+        population = new Population(scenario);
     }
 
     public void performDay(){
-        
+        population.forEach(Creature::performGenes);
+        for(Event event: scenario.getEvents()){
+            Population toApply = event.filter(population);
+            population = event.apply(toApply);
+        }
+        System.out.println(population.size());
     }
 }

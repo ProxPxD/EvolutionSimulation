@@ -11,17 +11,20 @@ import java.util.stream.Collectors;
 public class Scenario {
 
     @Setter @Getter
-    private int startingPopulation;
+    private int initialPopulation;
     @Getter
     private List<GeneSpace> geneSpaces;
+    @Getter
+    private List<Event> events;
 
     public Scenario(){
-        startingPopulation = SimulationConstants.STARTING_POPULATION;
+        initialPopulation = SimulationConstants.STARTING_POPULATION;
         geneSpaces = new ArrayList<>();
+        events = new ArrayList<>();
     }
 
     public void init(){
-        geneSpaces.forEach(s -> s.computeNumberOfIndividualsPerAllele(startingPopulation));
+        geneSpaces.forEach(s -> s.computeNumberOfIndividualsPerAllele(initialPopulation));
     }
 
     public void addGeneSpaces(GeneSpace... geneSpaces){
@@ -32,6 +35,10 @@ public class Scenario {
         if (this.geneSpaces.stream().map(GeneSpace::getGeneName).anyMatch(n -> n.equals(geneSpaceVariant.getGeneName())))
             throw new IllegalArgumentException("Allele group of the name \"" + geneSpaceVariant.getGeneName() + "\" already exists");
         this.geneSpaces.add(geneSpaceVariant);
+    }
+
+    public void addEvent(Event event){
+        events.add(event);
     }
 
     public Genotype getNextGenotype(){

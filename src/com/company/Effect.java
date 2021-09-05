@@ -14,6 +14,7 @@ public class Effect {
         return new Effect(name, TraitCondition.makeNotExist(name), t -> new Trait(name, value));
     }
 
+
     @Getter
     private String name;
     @Getter

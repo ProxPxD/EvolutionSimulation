@@ -3,7 +3,11 @@ package com.company;
 import java.util.HashMap;
 
 public class Phenotype {
-    private HashMap<String, Trait> traits = new HashMap<>();
+    private HashMap<String, Trait> traits;
+
+    public Phenotype(){
+        traits = new HashMap<>();
+    }
 
     public void addTrait(String TraitName){
         traits.put(TraitName, new Trait(TraitName));

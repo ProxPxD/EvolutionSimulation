@@ -60,6 +60,10 @@ public class TraitCondition {
 
     /// Without Trait class
 
+    public static TraitCondition makeTrue(String traitName){
+        return new TraitCondition(TRUE, new Trait(traitName));
+    }
+
     public static TraitCondition makeFalse(String traitName){
         return new TraitCondition(FALSE, new Trait(traitName));
     }

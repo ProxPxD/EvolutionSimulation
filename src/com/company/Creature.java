@@ -7,14 +7,12 @@ public class Creature {
 
     public Creature(Genotype genotype){
         this.genotype = genotype;
+        this.genotype.setOwner(this);
+        this.phenotype = new Phenotype();
     }
 
     public Phenotype getTraits(){
         return phenotype;
-    }
-
-    public Genotype getGenotype(){
-        return genotype;
     }
 
     public Trait getTrait(Trait trait){
@@ -27,5 +25,10 @@ public class Creature {
 
     public void applyEffect(Effect effect){
         phenotype.applyEffect(effect);
+    }
+
+    public void performGenes(){
+        if (genotype.shouldInfluence())
+            genotype.influence();
     }
 }
