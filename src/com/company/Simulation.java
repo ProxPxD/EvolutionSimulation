@@ -35,9 +35,14 @@ public class Simulation {
     }
 
     public void simulate(){
-        while (day < dayLimit){
+        while (areSimulationConditionsSatisfied()){
+            System.out.print(day + ": ");
             world.performDay();
             day++;
         }
+    }
+
+    private boolean areSimulationConditionsSatisfied(){
+        return day < dayLimit && world.getPopulation().size() < populationLimit;
     }
 }

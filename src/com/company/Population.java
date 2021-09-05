@@ -23,9 +23,15 @@ public class Population extends ArrayList<Creature>{
         return creature;
     }
 
-    public Population addMembers(Population population){
+    public Population add(Population population){
         Population newPopulation = new Population(this);
-        newPopulation.addAll(population);
+        population.forEach(newPopulation::add);
+        return newPopulation;
+    }
+
+    public Population removeAll(Population population){
+        Population newPopulation = new Population(this);
+        population.forEach(newPopulation::remove);
         return newPopulation;
     }
 
