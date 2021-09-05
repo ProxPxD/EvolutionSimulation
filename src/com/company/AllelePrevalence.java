@@ -3,15 +3,19 @@ package com.company;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class AllelePrevalence {
 
     private List<Allele> alleles;
-    private List<Double> prevalence;
+    private List<Double> percentage;
+    private List<Integer> numberOfIndividuals;
 
     public AllelePrevalence(){
         alleles = new ArrayList<>();
-        prevalence = new ArrayList<>();
+        percentage = new ArrayList<>();
+        numberOfIndividuals = new ArrayList<>();
     }
 
     public void addAllele(Allele allele){
@@ -49,7 +53,35 @@ public class AllelePrevalence {
     }
 
     private void setPrevalenceSafely(List<Double> percentages){
-        prevalence.clear();
-        prevalence.addAll(percentages);
+        percentage.clear();
+        percentage.addAll(percentages);
     }
+
+    public void computeNumberOfIndividualsPerAllele(int population){
+        numberOfIndividuals = percentage.stream().map(p -> (int) (population * p)).collect(Collectors.toList());
+        while (numberOfIndividuals.stream().anyMatch(a -> a == 0)){
+           adjustForZeroes();
+        }
+    }
+
+    private void adjustForZeroes(){
+        int zeroIndex = numberOfIndividuals.indexOf(0);
+        int biggest = numberOfIndividuals.stream().reduce(-1, Integer::max);
+        int greatestIndex = numberOfIndividuals.indexOf(biggest);
+        numberOfIndividuals.set(greatestIndex, biggest - 1);
+        numberOfIndividuals.set(zeroIndex, 1);
+    }
+
+    public Allele getNextAllele(){
+        Allele next;
+        for (int i = 0; i < numberOfIndividuals.size(); i++) {
+            if (numberOfIndividuals.get(i) > 0){
+                numberOfIndividuals.set(i, numberOfIndividuals.get(i) - 1);
+                next = alleles.get(i);
+                return next;
+            }
+        }
+        throw new IllegalStateException("There is no allele left");
+    }
+
 }

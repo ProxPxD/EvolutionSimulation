@@ -5,22 +5,24 @@ import java.util.List;
 
 public class World {
     private List<Creature> population;
+    private Scenario scenario;
 
-    public World(int startingPopulation){
-        initPopulation(startingPopulation);
+    public World(Scenario scenario){
+        this.scenario = scenario;
+        initPopulation();
     }
 
-    private void initPopulation(int startingPopulation) throws NotPositiveException {
+    private void initPopulation() throws NotPositiveException {
         population = new ArrayList<>();
-        if (startingPopulation <= 0)
+        if (scenario.getStartingPopulation() <= 0)
             throw new NotPositiveException("Population");
-        for(int i = 0; i < startingPopulation; i++){
+        for(int i = 0; i < scenario.getStartingPopulation(); i++){
             population.add(createCreature());
         }
     }
 
     private Creature createCreature(){
-        Creature creature = null;
+        Creature creature = new Creature(scenario.getNextGenotype());
         return creature;
     }
 

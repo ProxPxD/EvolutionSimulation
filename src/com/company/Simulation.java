@@ -22,12 +22,11 @@ public class Simulation {
 
     public Simulation(Scenario scenario){
         this();
-        this.scenario = scenario;
+        world = new World(scenario);
     }
 
     public void init(){
         initStartingValues();
-        world = new World(scenario.getStartingPopulation());
     }
 
     private void initStartingValues() throws NotPositiveException {
@@ -37,8 +36,6 @@ public class Simulation {
 
     public void simulate(){
         while (day < dayLimit){
-            System.out.print(day);
-            System.out.print(": ");
             world.performDay();
             day++;
         }

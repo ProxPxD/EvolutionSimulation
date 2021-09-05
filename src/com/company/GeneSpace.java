@@ -31,4 +31,12 @@ public class GeneSpace {
     public void setRatio(List<Double> ratio){
         alleles.setRatio(ratio);
     }
+
+    public void computeNumberOfIndividualsPerAllele(int population){
+        alleles.computeNumberOfIndividualsPerAllele(population);
+    }
+
+    public Allele getNextAllele(){
+        return alleles.getNextAllele();
+    }
 }
