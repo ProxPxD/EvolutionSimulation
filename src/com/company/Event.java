@@ -6,6 +6,8 @@ import lombok.Setter;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
+import static com.company.SimulationConstants.*;
+
 public class Event {
 
 
@@ -27,12 +29,12 @@ public class Event {
     }
 
     public static Event createBasicDeathRate(int period){
-        return createBasicDeathRate(period, SimulationConstants.DEATH_RATE_NAME);
+        return createBasicDeathRate(period, DEATH_RATE_NAME);
     }
 
     public static Event createBasicDeathRate(int period, String traitName){
-        Event newEvent = new Event(period, TraitCondition.makeGreaterThan(new Trait(traitName, SimulationConstants.randomSupplier)), (p, f) -> p.removeAll(f));
-        newEvent.setName(SimulationConstants.DEATH_RATE_NAME);
+        Event newEvent = new Event(period, TraitCondition.makeGreaterThan(new Trait(traitName, randomSupplier)), (p, f) -> p.removeAll(f));
+        newEvent.setName(DEATH_RATE_NAME);
         return newEvent;
     }
 
@@ -41,12 +43,12 @@ public class Event {
     }
 
     public static Event createBasicDuplicationRate(int period){
-        return createBasicDuplicationRate(period, SimulationConstants.DUPLICATION_RATE_NAME);
+        return createBasicDuplicationRate(period, DUPLICATION_RATE_NAME);
     }
 
     public static Event createBasicDuplicationRate(int period, String traitName){
-        Event newEvent = new Event(period, TraitCondition.makeGreaterThan(new Trait(traitName, SimulationConstants.randomSupplier)), Population::add);
-        newEvent.setName(SimulationConstants.DUPLICATION_RATE_NAME);
+        Event newEvent = new Event(period, TraitCondition.makeGreaterThan(new Trait(traitName, randomSupplier)), Population::add);
+        newEvent.setName(DUPLICATION_RATE_NAME);
         return newEvent;
     }
 
