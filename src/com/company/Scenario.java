@@ -12,20 +12,20 @@ public class Scenario {
     @Setter @Getter
     private int startingPopulation;
     @Getter
-    private List<Alleles> geneVariants;
+    private List<GeneAllelesSpace> geneAllelesSpaces;
 
     public Scenario(){
         startingPopulation = SimulationConstants.STARTING_POPULATION;
-        geneVariants = new ArrayList<>();
+        geneAllelesSpaces = new ArrayList<>();
     }
 
-    public void addGeneVariants(Alleles... Alleles){
-        Arrays.stream(Alleles).forEach(this::addGeneVariants);
+    public void addGeneSpace(GeneAllelesSpace... geneAllelesSpaces){
+        Arrays.stream(geneAllelesSpaces).forEach(this::addGeneSpace);
     }
 
-    public void addGeneVariants(Alleles geneVariant){
-        if (this.geneVariants.stream().map(Alleles::getGeneName).anyMatch(n -> n.equals(geneVariant.getGeneName())))
-            throw new IllegalArgumentException("Allele group of the name \"" + geneVariant.getGeneName() + "\" already exists");
-        this.geneVariants.add(geneVariant);
+    public void addGeneSpace(GeneAllelesSpace geneAllelesSpaceVariant){
+        if (this.geneAllelesSpaces.stream().map(GeneAllelesSpace::getGeneName).anyMatch(n -> n.equals(geneAllelesSpaceVariant.getGeneName())))
+            throw new IllegalArgumentException("Allele group of the name \"" + geneAllelesSpaceVariant.getGeneName() + "\" already exists");
+        this.geneAllelesSpaces.add(geneAllelesSpaceVariant);
     }
 }
