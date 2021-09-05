@@ -10,6 +10,10 @@ public class Effect {
         return new Effect(toCreate.getName(), TraitCondition.makeNotExist(toCreate), t -> toCreate);
     }
 
+    public static Effect makeCreationalEffect(String name, double value){
+        return new Effect(name, TraitCondition.makeNotExist(name), t -> new Trait(name, value));
+    }
+
     @Getter
     private String name;
     @Getter

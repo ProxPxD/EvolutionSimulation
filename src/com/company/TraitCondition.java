@@ -58,10 +58,54 @@ public class TraitCondition {
         return new TraitCondition(NOT_EXIST, trait);
     }
 
+    /// Without Trait class
+
+    public static TraitCondition makeFalse(String traitName){
+        return new TraitCondition(FALSE, new Trait(traitName));
+    }
+
+    public static TraitCondition makeEqual(String traitName){
+        return new TraitCondition(EQUAL, new Trait(traitName));
+    }
+
+    public static TraitCondition makeEqual(String traitName, double value){
+        return new TraitCondition(EQUAL, new Trait(traitName, value));
+    }
+
+    public static TraitCondition makeNotEqual(String traitName, double value){
+        return new TraitCondition(NOT_EQUAL, new Trait(traitName, value));
+    }
+
+    public static TraitCondition makeGreaterThan(String traitName, double value){
+        return new TraitCondition(GT, new Trait(traitName, value));
+    }
+
+    public static TraitCondition makeLessThan(String traitName, double value){
+        return new TraitCondition(LT, new Trait(traitName, value));
+    }
+
+    public static TraitCondition makeGreaterOrEqual(String traitName, double value){
+        return new TraitCondition(GE, new Trait(traitName, value));
+    }
+
+    public static TraitCondition makeLessOrEqual(String traitName, double value){
+        return new TraitCondition(LE, new Trait(traitName, value));
+    }
+
+
+    public static TraitCondition makeExist(String traitName){
+        return new TraitCondition(EXIST, new Trait(traitName));
+    }
+
+    public static TraitCondition makeNotExist(String traitName){
+        return new TraitCondition(NOT_EXIST, new Trait(traitName));
+    }
+
 
     private Trait trait;
     private ConditionType type = TRUE;
     private List<TraitCondition> subConditions = new ArrayList<>();
+
 
     private TraitCondition(ConditionType type, Trait trait){
         this.type = type;
@@ -99,6 +143,7 @@ public class TraitCondition {
         boolean isSatisfied;
         switch (type){
             case TRUE -> isSatisfied = true;
+            case FALSE -> isSatisfied = false;
             case EQUAL -> isSatisfied = creature.getTrait(trait).equals(trait);
             case NOT_EQUAL -> isSatisfied = !creature.getTrait(trait).equals(trait);
 
@@ -112,7 +157,6 @@ public class TraitCondition {
 
             case AND -> isSatisfied = areSatisfiedBy(creature, true, (acc, x) -> acc && x);
             case OR -> isSatisfied = areSatisfiedBy(creature, false, (acc, x) -> acc || x);
-            case FALSE -> isSatisfied = false;
             default -> throw new IllegalStateException(type.name() + " is not a legal type");
         }
         return isSatisfied;

@@ -6,9 +6,9 @@ public class Main {
         Scenario scenario = new Scenario();
 
         GeneSpace deathRate = new GeneSpace("deathRate");
-        deathRate.createAllele("A").addEffect(Effect.makeCreationalEffect(new Trait("deathRate", 0.02)));
+        deathRate.createAllele("A").addEffect(Effect.makeCreationalEffect("deathRate", 0.02));
         GeneSpace reproductionRate = new GeneSpace("reproductionRate");
-        reproductionRate.createAllele("A").addEffect(Effect.makeCreationalEffect(new Trait("reproductionRate", 0.05)));
+        reproductionRate.createAllele("A").addEffect(Effect.makeCreationalEffect("reproductionRate", 0.05));
 
         scenario.addGeneSpaces(deathRate, reproductionRate);
         scenario.setStartingPopulation(10);
