@@ -2,6 +2,7 @@ package com.company;
 
 import com.company.Factories.GeneSpace;
 import com.company.Inside.Genotype;
+import com.company.Outside.Event;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -2,6 +2,8 @@ package com.company;
 
 import com.company.Factories.GeneSpace;
 import com.company.Inside.Effects;
+import com.company.Outside.Event;
+import com.company.Outside.Events;
 
 public class Scenarios {
 
@@ -16,8 +18,8 @@ public class Scenarios {
 
         scenario.addGeneSpaces(deathRateGene, reproductionRateGene);
         scenario.setInitialPopulation(SimulationConstants.STARTING_POPULATION);
-        scenario.addEvent(Event.createBasicDuplicationRate());
-        scenario.addEvent(Event.createBasicDeathRate());
+        scenario.addEvent(Events.createBasicDuplicationRate());
+        scenario.addEvent(Events.createBasicDeathRate());
 
         return scenario;
     }

@@ -42,7 +42,7 @@ public class Simulation {
         printStateIfVerbose();
         while (areSimulationConditionsSatisfied()){
             world.performDay();
-            day++;
+            ++day;
             printStateIfVerbose();
             saveStateIfSaving();
         }
@@ -60,7 +60,7 @@ public class Simulation {
     private void printState(){
         int populationSize = world.getPopulation().size();
         String info = day + ": " + populationSize + "";
-        System.out.print(info);
+        System.out.println(info);
     }
 
     private void saveStateIfSaving(){

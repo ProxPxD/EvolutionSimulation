@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.Outside.Event;
 import lombok.Getter;
 
 import java.util.List;
@@ -21,10 +22,13 @@ public class World {
 
     public void performDay(){
         population.forEach(Creature::performGenes);
+        applyEvents();
+    }
+
+    private void applyEvents(){
         for(Event event: events){
             Population toApply = event.filter(population);
             population = event.apply(population, toApply);
         }
-        System.out.println();
     }
 }
