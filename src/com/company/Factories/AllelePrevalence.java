@@ -4,6 +4,7 @@ import com.company.Inside.Allele;
 import com.company.NotPositiveException;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class AllelePrevalence {
@@ -33,7 +34,7 @@ public class AllelePrevalence {
         if (ratios.stream().anyMatch(p -> p < 0))
             throw new NotPositiveException("Ratio");
 
-        percentages = ratios;
+        percentages.addAll(ratios);
         AdjustLackingPercentages();
         normalisePercentages();
     }
@@ -45,7 +46,7 @@ public class AllelePrevalence {
     }
 
     private void normalisePercentages(){
-        percentages = percentages.stream().map(r -> r / sumPercentages()).toList();
+        percentages = percentages.stream().map(r -> r / sumPercentages()).collect(Collectors.toList());;
     }
 
     private double sumPercentages(){
@@ -61,7 +62,7 @@ public class AllelePrevalence {
         numberOfIndividuals = percentages.stream()
                 .map(p -> (int) (population * p))
                 .map(n -> n == 0 ? 1 : n)
-                .toList();
+                .collect(Collectors.toList());
         adjustNumberOfIndividuals(population);
     }
 
