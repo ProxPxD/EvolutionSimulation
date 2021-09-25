@@ -7,8 +7,10 @@ public class Main {
         Scenario scenario = Scenarios.simpleReproduction(0.02, 0.02);
 
         Simulation simulation = new Simulation(scenario);
+        simulation.setVerbose(true);
+        simulation.setSavingState(false);
         simulation.setDayLimit(100);
-        simulation.setPopulationLimit(1000);
+        simulation.setPopulationLimit(5000);
         simulation.init();
 
         simulation.simulate();
