@@ -1,9 +1,9 @@
-package com.company;
+package com.company.Factories;
 
+import com.company.Inside.Allele;
 import lombok.Getter;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class GeneSpace {
@@ -17,13 +17,11 @@ public class GeneSpace {
     }
 
     public Allele createAllele(String alleleName){
-        Allele allele = new Allele(geneName, alleleName);
-        alleles.addAllele(allele);
-        return allele;
+        return alleles.addAllele(new Allele(geneName, alleleName));
     }
 
     public void setEquinumerousRatio(){
-        alleles.setEquinumerousRatio();
+        alleles.setEquinumerousPercentage();
     }
 
     public void setRatio(Integer... ratio){

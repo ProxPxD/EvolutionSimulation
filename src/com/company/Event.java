@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.Inside.Trait;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,11 +16,11 @@ public class Event {
     private String name;
     @Getter
     private Integer period;
-    private TraitCondition traitCondition;
+    private TraitPredicate traitPredicate;
     private BiFunction<Population, Population, Population> effect;
 
-    public static Event createDailyEvent(TraitCondition traitCondition, BiFunction<Population, Population, Population> effect){
-        Event newEvent = new Event(1, traitCondition, effect);
+    public static Event createDailyEvent(TraitPredicate traitPredicate, BiFunction<Population, Population, Population> effect){
+        Event newEvent = new Event(1, traitPredicate, effect);
         newEvent.setName("Daily Event");
         return newEvent;
     }
@@ -33,7 +34,7 @@ public class Event {
     }
 
     public static Event createBasicDeathRate(int period, String traitName){
-        Event newEvent = new Event(period, TraitCondition.makeGreaterThan(new Trait(traitName, randomSupplier)), (p, f) -> p.removeAll(f));
+        Event newEvent = new Event(period, TraitPredicate.makeGreaterThan(new Trait(traitName, randomSupplier)), (p, f) -> p.removeAll(f));
         newEvent.setName(DEATH_RATE_NAME);
         return newEvent;
     }
@@ -47,19 +48,19 @@ public class Event {
     }
 
     public static Event createBasicDuplicationRate(int period, String traitName){
-        Event newEvent = new Event(period, TraitCondition.makeGreaterThan(new Trait(traitName, randomSupplier)), Population::add);
+        Event newEvent = new Event(period, TraitPredicate.makeGreaterThan(new Trait(traitName, randomSupplier)), Population::add);
         newEvent.setName(DUPLICATION_RATE_NAME);
         return newEvent;
     }
 
-    public Event(int period, TraitCondition traitCondition, BiFunction<Population, Population, Population> effect){
+    public Event(int period, TraitPredicate traitPredicate, BiFunction<Population, Population, Population> effect){
         this.period = period;
-        this.traitCondition = traitCondition;
+        this.traitPredicate = traitPredicate;
         this.effect = effect;
     }
 
     public Population filter(Population population){
-        return new Population(population.stream().filter(traitCondition::isSatisfiedBy).collect(Collectors.toList()));
+        return new Population(population.stream().filter(traitPredicate::isSatisfiedBy).collect(Collectors.toList()));
     }
 
     public Population apply(Population population, Population filtered){

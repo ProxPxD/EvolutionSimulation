@@ -1,4 +1,4 @@
-package com.company;
+package com.company.Inside;
 
 import lombok.Getter;
 

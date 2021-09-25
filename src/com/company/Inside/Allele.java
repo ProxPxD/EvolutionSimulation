@@ -1,5 +1,6 @@
-package com.company;
+package com.company.Inside;
 
+import com.company.Creature;
 import lombok.Getter;
 
 import java.util.ArrayList;

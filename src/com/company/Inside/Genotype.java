@@ -1,5 +1,7 @@
-package com.company;
+package com.company.Inside;
 
+import com.company.Creature;
+import com.company.Inside.Allele;
 import lombok.Getter;
 
 import java.util.List;

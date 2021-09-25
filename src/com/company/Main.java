@@ -1,7 +1,7 @@
 package com.company;
 
-import java.util.Random;
-import java.util.stream.Collectors;
+import com.company.Factories.GeneSpace;
+import com.company.Inside.Effects;
 
 public class Main {
 
@@ -9,9 +9,9 @@ public class Main {
         Scenario scenario = new Scenario();
 
         GeneSpace deathRate = new GeneSpace(SimulationConstants.DEATH_RATE_NAME);
-        deathRate.createAllele("A").addEffect(Effect.makeCreationalEffect(SimulationConstants.DEATH_RATE_NAME, 0.02));
+        deathRate.createAllele("A").addEffect(Effects.makeCreationalEffect(SimulationConstants.DEATH_RATE_NAME, 0.02));
         GeneSpace reproductionRate = new GeneSpace(SimulationConstants.DUPLICATION_RATE_NAME);
-        reproductionRate.createAllele("A").addEffect(Effect.makeCreationalEffect(SimulationConstants.DUPLICATION_RATE_NAME, 0.02));
+        reproductionRate.createAllele("A").addEffect(Effects.makeCreationalEffect(SimulationConstants.DUPLICATION_RATE_NAME, 0.02));
         scenario.addGeneSpaces(deathRate, reproductionRate);
         scenario.setInitialPopulation(100);
 
@@ -20,7 +20,7 @@ public class Main {
 
         Simulation simulation = new Simulation(scenario);
         simulation.setDayLimit(100);
-        simulation.setPopulationLimit(300000);
+        simulation.setPopulationLimit(1000);
         simulation.init();
         simulation.simulate();
     }

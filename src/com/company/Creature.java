@@ -1,5 +1,10 @@
 package com.company;
 
+import com.company.Inside.Effect;
+import com.company.Inside.Genotype;
+import com.company.Inside.Phenotype;
+import com.company.Inside.Trait;
+
 public class Creature {
 
     private Genotype genotype;
