@@ -7,6 +7,8 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 
+import static com.company.SimulationConstants.randIndex;
+
 public class Population extends ArrayList<Creature>{
 
     public Population(){
@@ -47,12 +49,14 @@ public class Population extends ArrayList<Creature>{
         return newPopulation;
     }
 
+    public Creature getRandom(){
+        return get(randIndex.apply(size()));
+    }
+
     public Creature pop(){
-        Random random = new Random();
-        int index = random.nextInt(size());
-        Creature toReturn = get(index);
-        remove(index);
-        return toReturn;
+        Creature creature = getRandom();
+        remove(creature);
+        return creature;
     }
 
     public static Collector<Creature, Population, Population> getCollector(){

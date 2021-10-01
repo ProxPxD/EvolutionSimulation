@@ -1,42 +1,35 @@
 package com.company.Outside;
 
 import com.company.Creature;
-import com.company.Inside.Trait;
 import com.company.PayoutMatrix;
 import com.company.Population;
-import com.company.TraitPredicate;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static com.company.SimulationConstants.*;
 
 public class Events {
 
-    public static Event createBasicDeathRate(){
-        return createBasicDeathRate(1);
+    public static Event createBasicDeathRate(double rate){
+        return createBasicDeathRate(1, rate);
     }
 
-    public static Event createBasicDeathRate(int period){
-        return createBasicDeathRate(period, DEATH_RATE_NAME);
-    }
-
-    public static Event createBasicDeathRate(int period, String traitName){
-        TraitPredicate cond = TraitPredicate.makeGreaterThan(new Trait(traitName, randomSupplier));
-        Event newEvent = new Event(period, p -> p.stream().filter(c -> !cond.isSatisfiedBy(c)).collect(Population.getCollector()));
+    public static Event createBasicDeathRate(int period, double rate) {
+        Event newEvent = new Event(period, p -> p.stream().filter(c -> rate <= randDouble.get()).collect(Population.getCollector()));
         newEvent.setName(DEATH_RATE_NAME);
         return newEvent;
     }
 
 
-    public static Event createBasicDuplicationRate(){
-        return createBasicDuplicationRate(1);
+    public static Event createBasicDuplicationRate(double rate){
+        return createBasicDuplicationRate(1, rate);
     }
 
-    public static Event createBasicDuplicationRate(int period){
-        return createBasicDuplicationRate(period, DUPLICATION_RATE_NAME);
-    }
-
-    public static Event createBasicDuplicationRate(int period, String traitName){
-        TraitPredicate cond = TraitPredicate.makeGreaterThan(new Trait(traitName, randomSupplier));
-        Event newEvent = new Event(period, p -> p.add(p.stream().filter(cond::isSatisfiedBy).collect(Population.getCollector())));
+    public static Event createBasicDuplicationRate(int period, double rate) {
+        Event newEvent = new Event(period, p -> p.stream().map(c -> copyCreature((int) (rate + randDouble.get()), c)).reduce(p, Population::add));
         newEvent.setName(DUPLICATION_RATE_NAME);
         return newEvent;
     }
@@ -54,6 +47,10 @@ public class Events {
 //        newEvent.setName("Conditional Death");
 //        return newEvent;
 //    }
+
+    public static Population copyCreature(int n, Creature creature){
+        return Stream.generate(() -> creature).limit(n).collect(Population.getCollector());
+    }
 
 
     public static Population performDuel(Population population, PayoutMatrix matrix, String targetTraitName){
