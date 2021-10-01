@@ -21,7 +21,7 @@ public class Creature {
     }
 
     public Trait getTrait(Trait trait){
-        return getTrait(trait.getName());
+        return getTrait(trait.getType());
     }
 
     public Trait getTrait(String name){

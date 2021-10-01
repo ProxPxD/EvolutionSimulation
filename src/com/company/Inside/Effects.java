@@ -1,15 +1,13 @@
 package com.company.Inside;
 
-import com.company.Population;
 import com.company.TraitPredicate;
 
-import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class Effects {
 
     public static Effect makeCreationalEffect(Trait toCreate){
-        return new Effect(toCreate.getName(), TraitPredicate.makeNotExist(toCreate), t -> toCreate);
+        return new Effect(toCreate.getType(), TraitPredicate.makeNotExist(toCreate), t -> toCreate);
     }
 
     public static Effect makeCreationalEffect(String name, double value){

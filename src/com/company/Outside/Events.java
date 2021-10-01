@@ -36,7 +36,7 @@ public class Events {
 
     public static Event createBasicDuplicationRate(int period, String traitName){
         TraitPredicate cond = TraitPredicate.makeGreaterThan(new Trait(traitName, randomSupplier));
-        Event newEvent = new Event(period,p -> p.add(p.stream().filter(cond::isSatisfiedBy).collect(Population.getCollector())) );
+        Event newEvent = new Event(period, p -> p.add(p.stream().filter(cond::isSatisfiedBy).collect(Population.getCollector())));
         newEvent.setName(DUPLICATION_RATE_NAME);
         return newEvent;
     }

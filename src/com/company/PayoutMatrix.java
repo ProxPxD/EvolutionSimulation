@@ -22,7 +22,7 @@ public class PayoutMatrix {
     }
 
     public SimpleEntry<Double, Double> get(Creature creature1, Creature creature2){
-        return get(creature1.getTrait(trait).getName(), creature2.getTrait(trait).getName());
+        return get(creature1.getTrait(trait).getType(), creature2.getTrait(trait).getType());
     }
 
     public SimpleEntry<Double, Double> get(String trait1, String trait2){

@@ -8,20 +8,33 @@ import java.util.function.Supplier;
 public class Trait {
 
     @Getter
-    private String name;
+    private String type;
+    @Getter String name;
     private Supplier<Double> supplier;
 
-    public Trait(String name, Supplier<Double> supplier){
+    public Trait(String type, String name, Supplier<Double> supplier){
+        this.type = type;
         this.name = name;
         this.supplier = supplier;
     }
 
-    public Trait(String name){
-        this(name, () -> 0.0);
+    public Trait(String type){
+        this(type, "");
     }
 
-    public Trait(String name, double value){
-        this(name, () -> value);
+    public Trait(String type, double value){
+        this(type, "", value);
+    }
+
+    public Trait(String type, Supplier<Double> supplier){
+        this(type, "", supplier);
+    }
+    public Trait(String type, String name){
+        this(type, name, () -> 0.0);
+    }
+
+    public Trait(String type, String name, double value){
+        this(type, name, () -> value);
     }
 
     public double getValue(){
@@ -43,11 +56,11 @@ public class Trait {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Trait trait = (Trait) o;
-        return Double.compare(trait.getValue(), getValue()) == 0 && Objects.equals(name, trait.name);
+        return Double.compare(trait.getValue(), getValue()) == 0 && Objects.equals(type, trait.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, supplier);
+        return Objects.hash(type, supplier);
     }
 }

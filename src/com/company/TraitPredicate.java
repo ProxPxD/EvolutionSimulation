@@ -64,45 +64,45 @@ public class TraitPredicate implements Predicate<Creature> {
 
     /// Without Trait class
 
-    public static TraitPredicate makeTrue(String traitName){
-        return new TraitPredicate(TRUE, new Trait(traitName));
+    public static TraitPredicate makeTrue(String type){
+        return new TraitPredicate(TRUE, new Trait(type));
     }
 
-    public static TraitPredicate makeFalse(String traitName){
-        return new TraitPredicate(FALSE, new Trait(traitName));
+    public static TraitPredicate makeFalse(String type){
+        return new TraitPredicate(FALSE, new Trait(type));
     }
 
-    public static TraitPredicate makeEqual(String traitName){
-        return new TraitPredicate(EQUAL, new Trait(traitName));
+    public static TraitPredicate makeEqual(String type){
+        return new TraitPredicate(EQUAL, new Trait(type));
     }
 
-    public static TraitPredicate makeEqual(String traitName, double value){
-        return new TraitPredicate(EQUAL, new Trait(traitName, value));
+    public static TraitPredicate makeEqual(String type, double value){
+        return new TraitPredicate(EQUAL, new Trait(type, value));
     }
 
-    public static TraitPredicate makeNotEqual(String traitName, double value){
-        return new TraitPredicate(NOT_EQUAL, new Trait(traitName, value));
+    public static TraitPredicate makeNotEqual(String type, double value){
+        return new TraitPredicate(NOT_EQUAL, new Trait(type, value));
     }
 
-    public static TraitPredicate makeGreaterThan(String traitName, double value){
-        return new TraitPredicate(GT, new Trait(traitName, value));
+    public static TraitPredicate makeGreaterThan(String type, double value){
+        return new TraitPredicate(GT, new Trait(type, value));
     }
 
-    public static TraitPredicate makeLessThan(String traitName, double value){
-        return new TraitPredicate(LT, new Trait(traitName, value));
+    public static TraitPredicate makeLessThan(String type, double value){
+        return new TraitPredicate(LT, new Trait(type, value));
     }
 
-    public static TraitPredicate makeGreaterOrEqual(String traitName, double value){
-        return new TraitPredicate(GE, new Trait(traitName, value));
+    public static TraitPredicate makeGreaterOrEqual(String type, double value){
+        return new TraitPredicate(GE, new Trait(type, value));
     }
 
-    public static TraitPredicate makeLessOrEqual(String traitName, double value){
-        return new TraitPredicate(LE, new Trait(traitName, value));
+    public static TraitPredicate makeLessOrEqual(String type, double value){
+        return new TraitPredicate(LE, new Trait(type, value));
     }
 
 
-    public static TraitPredicate makeExist(String traitName){
-        return new TraitPredicate(EXIST, new Trait(traitName));
+    public static TraitPredicate makeExist(String type){
+        return new TraitPredicate(EXIST, new Trait(type));
     }
 
     public static TraitPredicate makeNotExist(String traitName){
@@ -165,8 +165,8 @@ public class TraitPredicate implements Predicate<Creature> {
             case LT -> isSatisfied = creature.getTrait(trait).getValue() < trait.getValue();
             case LE -> isSatisfied = creature.getTrait(trait).getValue() <= trait.getValue();
 
-            case EXIST -> isSatisfied = creature.getTraits().exist(trait.getName());
-            case NOT_EXIST -> isSatisfied = !creature.getTraits().exist(trait.getName());
+            case EXIST -> isSatisfied = creature.getTraits().exist(trait.getType());
+            case NOT_EXIST -> isSatisfied = !creature.getTraits().exist(trait.getType());
 
             case AND -> isSatisfied = areSatisfiedBy(creature, true, (acc, x) -> acc && x);
             case OR -> isSatisfied = areSatisfiedBy(creature, false, (acc, x) -> acc || x);
