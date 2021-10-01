@@ -2,7 +2,6 @@ package com.company;
 
 import com.company.Factories.GeneSpace;
 import com.company.Inside.Effects;
-import com.company.Outside.Event;
 import com.company.Outside.Events;
 
 public class Scenarios {

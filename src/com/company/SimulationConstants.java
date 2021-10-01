@@ -14,5 +14,6 @@ public class SimulationConstants {
 
     public static final String DEATH_RATE_NAME = "Death Rate";
     public static final String DUPLICATION_RATE_NAME = "Duplication Rate";
+    public static final String DUEL_NAME = "Duel";
 
 }

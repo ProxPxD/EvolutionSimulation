@@ -28,6 +28,16 @@ public class Trait {
         return supplier.get();
     }
 
+    public Trait set(double value){
+        supplier = () -> value;
+        return this;
+    }
+
+    public Trait add(double val){
+        supplier = () -> supplier.get() + val;
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

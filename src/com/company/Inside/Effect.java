@@ -15,6 +15,10 @@ public class Effect {
     private TraitPredicate traitPredicate;
     private Function<Trait, Trait> effect;
 
+    Effect(String targetTraitName, Function<Trait, Trait> effect){
+        this(targetTraitName, TraitPredicate.makeTrue(targetTraitName), effect);
+    }
+
     Effect(String targetTraitName, TraitPredicate traitPredicate, Function<Trait, Trait> effect){
         this.target = targetTraitName;
         this.traitPredicate = traitPredicate;

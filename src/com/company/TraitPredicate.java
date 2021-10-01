@@ -130,7 +130,6 @@ public class TraitPredicate implements Predicate<Creature> {
         subConditions.add(condition1);
     }
 
-
     public TraitPredicate and(TraitPredicate... traitPredicate){
         return new TraitPredicate(this, AND, traitPredicate);
     }

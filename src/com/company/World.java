@@ -4,6 +4,7 @@ import com.company.Outside.Event;
 import lombok.Getter;
 
 import java.util.List;
+import java.util.Random;
 
 public class World {
     @Getter
@@ -26,9 +27,7 @@ public class World {
     }
 
     private void applyEvents(){
-        for(Event event: events){
-            Population toApply = event.filter(population);
-            population = event.apply(population, toApply);
-        }
+        for(Event event: events)
+            population = event.apply(population);
     }
 }
